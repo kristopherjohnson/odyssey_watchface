@@ -1,8 +1,8 @@
 {
   "uuid": "68668d5a-4f7c-4b25-9aed-6bd97970ad80",
-  "shortName": "michroma_watchface",
-  "longName": "michroma_watchface",
-  "companyName": "MakeAwesomeHappen",
+  "shortName": "Michroma",
+  "longName": "Michroma",
+  "companyName": "Kristopher Johnson",
   "versionCode": 1,
   "versionLabel": "1.0.0",
   "watchapp": {
@@ -12,6 +12,12 @@
     "dummy": 0
   },
   "resources": {
-    "media": []
+    "media": [
+        {
+            "type": "font",
+            "name": "FONT_MICHROMA_32",
+            "file": "fonts/Michroma.ttf"
+        }
+    ]
   }
 }
