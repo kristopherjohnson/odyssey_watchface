@@ -1,12 +1,12 @@
 {
   "uuid": "68668d5a-4f7c-4b25-9aed-6bd97970ad80",
-  "shortName": "Michroma",
-  "longName": "Michroma",
+  "shortName": "Odyssey",
+  "longName": "Odyssey",
   "companyName": "Kristopher Johnson",
   "versionCode": 1,
   "versionLabel": "1.0.0",
   "watchapp": {
-    "watchface": false
+    "watchface": true
   },
   "appKeys": {
     "dummy": 0
@@ -16,6 +16,11 @@
         {
             "type": "font",
             "name": "FONT_MICHROMA_32",
+            "file": "fonts/Michroma.ttf"
+        },
+        {
+            "type": "font",
+            "name": "FONT_MICHROMA_18",
             "file": "fonts/Michroma.ttf"
         }
     ]
