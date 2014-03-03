@@ -15,16 +15,6 @@
     "media": [
         {
             "type": "font",
-            "name": "FONT_MICHROMA_32",
-            "file": "fonts/Michroma.ttf"
-        },
-        {
-            "type": "font",
-            "name": "FONT_MICHROMA_18",
-            "file": "fonts/Michroma.ttf"
-        },
-        {
-            "type": "font",
             "name": "FONT_DAYS_40",
             "file": "fonts/Days.otf"
         },
