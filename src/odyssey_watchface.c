@@ -24,8 +24,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <pebble.h>
 #include <ctype.h>
 
-#define RESOURCE_ID_TIME_FONT RESOURCE_ID_FONT_MICHROMA_32
-#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_MICHROMA_18
+#define RESOURCE_ID_TIME_FONT RESOURCE_ID_FONT_DAYS_40
+#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_DAYS_20
+
+#define USE_FIXED_TEXT 0
 
 static Window *window;
 static TextLayer *time_text_layer;
@@ -38,7 +40,10 @@ static void convert_to_uppercase(char s[]) {
 }
 
 static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
-  // Need to be static because they're used by the system later.
+#if USE_FIXED_TEXT
+  text_layer_set_text(time_text_layer, "22:33");
+  text_layer_set_text(date_text_layer, "WED 29")
+#else
   static char time_text[] = "00:00";
   static char date_text[] = "XXX 00";
 
@@ -63,20 +68,21 @@ static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   strftime(date_text, sizeof(date_text), "%a %d", tick_time);
   convert_to_uppercase(date_text);
   text_layer_set_text(date_text_layer, date_text);
+#endif
 }
 
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  time_text_layer= text_layer_create((GRect) { .origin = { 0, 50 }, .size = { bounds.size.w, 40 } });
+  time_text_layer= text_layer_create((GRect) { .origin = { 0, 75 }, .size = { bounds.size.w, 40 } });
   text_layer_set_font(time_text_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_TIME_FONT)));
   text_layer_set_text_alignment(time_text_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(time_text_layer));
 
-  date_text_layer= text_layer_create((GRect) { .origin = { 0, 110 }, .size = { bounds.size.w, 40 } });
+  date_text_layer= text_layer_create((GRect) { .origin = { 2, 55 }, .size = { bounds.size.w - 2, 20 } });
   text_layer_set_font(date_text_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DATE_FONT)));
-  text_layer_set_text_alignment(date_text_layer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(date_text_layer, GTextAlignmentLeft);
   layer_add_child(window_layer, text_layer_get_layer(date_text_layer));
 
   // Set initial text
