@@ -25,13 +25,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <ctype.h>
 
 #define RESOURCE_ID_TIME_FONT RESOURCE_ID_FONT_DAYS_40
-#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_DAYS_20
+#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_DAYS_18
 
 #define USE_FIXED_TEXT 0
 
 static Window *window;
-static TextLayer *time_text_layer;
-static TextLayer *date_text_layer;
+static TextLayer *timeTextLayer;
+static TextLayer *dateTextLayer;
 
 static void convert_to_uppercase(char s[]) {
   for (unsigned i = 0; s[i] != 0; ++i) {
@@ -41,8 +41,8 @@ static void convert_to_uppercase(char s[]) {
 
 static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
 #if USE_FIXED_TEXT
-  text_layer_set_text(time_text_layer, "22:33");
-  text_layer_set_text(date_text_layer, "WED 29")
+  text_layer_set_text(timeTextLayer, "22:33");
+  text_layer_set_text(dateTextLayer, "WED 29")
 #else
   static char time_text[] = "00:00";
   static char date_text[] = "XXX 00";
@@ -63,11 +63,11 @@ static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
     memmove(time_text, &time_text[1], sizeof(time_text) - 1);
   }
 
-  text_layer_set_text(time_text_layer, time_text);
+  text_layer_set_text(timeTextLayer, time_text);
 
   strftime(date_text, sizeof(date_text), "%a %d", tick_time);
   convert_to_uppercase(date_text);
-  text_layer_set_text(date_text_layer, date_text);
+  text_layer_set_text(dateTextLayer, date_text);
 #endif
 }
 
@@ -75,15 +75,27 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  time_text_layer= text_layer_create((GRect) { .origin = { 0, 75 }, .size = { bounds.size.w, 40 } });
-  text_layer_set_font(time_text_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_TIME_FONT)));
-  text_layer_set_text_alignment(time_text_layer, GTextAlignmentCenter);
-  layer_add_child(window_layer, text_layer_get_layer(time_text_layer));
+  int time_layer_top = 75;
+  int time_layer_height = 40;
+  int date_layer_height = 20;
 
-  date_text_layer= text_layer_create((GRect) { .origin = { 2, 55 }, .size = { bounds.size.w - 2, 20 } });
-  text_layer_set_font(date_text_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DATE_FONT)));
-  text_layer_set_text_alignment(date_text_layer, GTextAlignmentLeft);
-  layer_add_child(window_layer, text_layer_get_layer(date_text_layer));
+  dateTextLayer= text_layer_create((GRect) {
+    .origin = { 2, time_layer_top - date_layer_height + 8 },
+    .size = { bounds.size.w - 2, date_layer_height }
+  });
+  text_layer_set_font(dateTextLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DATE_FONT)));
+  text_layer_set_text_alignment(dateTextLayer, GTextAlignmentLeft);
+  text_layer_set_background_color(dateTextLayer, GColorClear);
+  layer_add_child(window_layer, text_layer_get_layer(dateTextLayer));
+
+  timeTextLayer= text_layer_create((GRect) {
+    .origin = { 0, time_layer_top },
+    .size = { bounds.size.w, time_layer_height }
+  });
+  text_layer_set_font(timeTextLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_TIME_FONT)));
+  text_layer_set_text_alignment(timeTextLayer, GTextAlignmentCenter);
+  text_layer_set_background_color(timeTextLayer, GColorClear);
+  layer_add_child(window_layer, text_layer_get_layer(timeTextLayer));
 
   // Set initial text
   time_t t;
@@ -93,8 +105,8 @@ static void window_load(Window *window) {
 }
 
 static void window_unload(Window *window) {
-  text_layer_destroy(time_text_layer);
-  text_layer_destroy(date_text_layer);
+  text_layer_destroy(timeTextLayer);
+  text_layer_destroy(dateTextLayer);
 }
 
 static void init(void) {
