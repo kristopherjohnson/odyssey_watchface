@@ -1,4 +1,4 @@
-PHONE_IP_ADDRESS=192.168.1.111
+PHONE_IP_ADDRESS=192.168.1.119
 
 .PHONY: install screenshot clean
 

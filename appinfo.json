@@ -15,12 +15,12 @@
     "media": [
         {
             "type": "font",
-            "name": "FONT_DAYS_40",
+            "name": "FONT_TIME_31",
             "file": "fonts/Days.otf"
         },
         {
             "type": "font",
-            "name": "FONT_DAYS_18",
+            "name": "FONT_DATE_15",
             "file": "fonts/Days.otf"
         }
     ]

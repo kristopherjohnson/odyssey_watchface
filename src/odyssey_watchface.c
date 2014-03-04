@@ -24,9 +24,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <pebble.h>
 #include <ctype.h>
 
-#define RESOURCE_ID_TIME_FONT RESOURCE_ID_FONT_DAYS_40
-#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_DAYS_18
+#define RESOURCE_ID_TIME_FONT RESOURCE_ID_FONT_TIME_31
+#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_DATE_15
 
+// Set non-zero to use large text strings to verify layout
 #define USE_FIXED_TEXT 0
 
 static Window *window;
@@ -42,7 +43,7 @@ static void convert_to_uppercase(char s[]) {
 static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
 #if USE_FIXED_TEXT
   text_layer_set_text(timeTextLayer, "22:33");
-  text_layer_set_text(dateTextLayer, "WED 29")
+  text_layer_set_text(dateTextLayer, "WED 29");
 #else
   static char time_text[] = "00:00";
   static char date_text[] = "XXX 00";
@@ -80,7 +81,7 @@ static void window_load(Window *window) {
   int date_layer_height = 20;
 
   dateTextLayer= text_layer_create((GRect) {
-    .origin = { 2, time_layer_top - date_layer_height + 8 },
+    .origin = { 2, time_layer_top - date_layer_height + 4 },
     .size = { bounds.size.w - 2, date_layer_height }
   });
   text_layer_set_font(dateTextLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DATE_FONT)));
