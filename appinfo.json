@@ -3,8 +3,8 @@
   "shortName": "Odyssey",
   "longName": "Odyssey",
   "companyName": "Kristopher Johnson",
-  "versionCode": 2,
-  "versionLabel": "1.1.0",
+  "versionCode": 3,
+  "versionLabel": "1.2.0",
   "watchapp": {
     "watchface": true
   },
@@ -15,12 +15,12 @@
     "media": [
         {
             "type": "font",
-            "name": "FONT_DAYS_40",
+            "name": "FONT_TIME_31",
             "file": "fonts/Days.otf"
         },
         {
             "type": "font",
-            "name": "FONT_DAYS_20",
+            "name": "FONT_DATE_15",
             "file": "fonts/Days.otf"
         }
     ]
