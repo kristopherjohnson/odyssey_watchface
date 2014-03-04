@@ -1,22 +1,24 @@
 # Odyssey Watchface
 
-This is a simple [Pebble](http://getpebble.com) watchface, inspired by 1960's science fiction films.
+This is a simple [Pebble](http://getpebble.com) watchface, inspired by the look of 1960's science fiction films.
 
 *The 9000 series has a perfect operational record.*
 
 
 ## Font
 
-The source tree includes the free [Days](http://www.fontsquirrel.com/fonts/Days) font, which looks like this:
+This source distribution includes the free [Days](http://www.fontsquirrel.com/fonts/Days) font, which looks like this:
 
 ![Days font screenshot](odyssey_screenshot.png)
 
-To get the authentic 1960's futuristic look, you can use [Eurostile Bold Extended](http://en.wikipedia.org/wiki/Eurostile)
-or [Microgramma](http://en.wikipedia.org/wiki/Microgramma_(typeface):
+To get the authentic 60's sci-fi look, you can use [Eurostile Bold Extended](http://en.wikipedia.org/wiki/Eurostile)
+or [Microgramma Bold Extended](http://en.wikipedia.org/wiki/Microgramma_%28typeface%29):
 
 ![Eurostile Bold Extended font screenshot](eurostile_screenshot.png)
 
-Note that Eurostile and Microgramma are commercial fonts, not available for free distribution.
+Note that Eurostile and Microgramma are commercial fonts, so there may be restrictions
+on obtaining, using, and distributing them.  However, while a font file is needed to
+build the watchface app, the font file itself is not embedded in the binary.
 
 To use one of these fonts to build the watchface, do the following:
 
