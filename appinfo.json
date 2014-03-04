@@ -16,12 +16,12 @@
         {
             "type": "font",
             "name": "FONT_TIME_31",
-            "file": "fonts/Days.otf"
+            "file": "fonts/EurostileLTStd-BoldEx2.otf"
         },
         {
             "type": "font",
             "name": "FONT_DATE_15",
-            "file": "fonts/Days.otf"
+            "file": "fonts/EurostileLTStd-BoldEx2.otf"
         }
     ]
   }
