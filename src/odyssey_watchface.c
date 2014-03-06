@@ -30,6 +30,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // Set non-zero to use large text strings to verify layout
 #define USE_FIXED_TEXT 0
 
+// Set non-zero for dark background and light text
+#define USE_DARK_BACKGROUND 1
+
 static Window *window;
 static TextLayer *timeTextLayer;
 static TextLayer *dateTextLayer;
@@ -72,6 +75,24 @@ static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
 #endif
 }
 
+#if USE_DARK_BACKGROUND
+
+static void set_dark_background() {
+  window_set_background_color(window, GColorBlack);
+  text_layer_set_text_color(timeTextLayer, GColorWhite);
+  text_layer_set_text_color(dateTextLayer, GColorWhite);
+}
+
+#else
+
+static void set_light_background() {
+  window_set_background_color(window, GColorWhite);
+  text_layer_set_text_color(timeTextLayer, GColorBlack);
+  text_layer_set_text_color(dateTextLayer, GColorBlack);
+}
+
+#endif
+
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
@@ -97,6 +118,12 @@ static void window_load(Window *window) {
   text_layer_set_text_alignment(timeTextLayer, GTextAlignmentCenter);
   text_layer_set_background_color(timeTextLayer, GColorClear);
   layer_add_child(window_layer, text_layer_get_layer(timeTextLayer));
+
+#if USE_DARK_BACKGROUND
+  set_dark_background();
+#else
+  set_light_background();
+#endif
 
   // Set initial text
   time_t t;
