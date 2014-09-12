@@ -25,7 +25,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <ctype.h>
 
 #define RESOURCE_ID_TIME_FONT RESOURCE_ID_FONT_TIME_31
-#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_DATE_15
+#define RESOURCE_ID_DATE_FONT RESOURCE_ID_FONT_DATE_16
 
 // Set non-zero to use large text strings to verify layout
 #define USE_FIXED_TEXT 0
@@ -97,12 +97,12 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  int time_layer_top = 75;
+  int time_layer_top = 82;
   int time_layer_height = 40;
   int date_layer_height = 20;
 
-  dateTextLayer= text_layer_create((GRect) {
-    .origin = { 2, time_layer_top - date_layer_height + 4 },
+  dateTextLayer = text_layer_create((GRect) {
+    .origin = { 2, time_layer_top - date_layer_height + 2 },
     .size = { bounds.size.w - 2, date_layer_height }
   });
   text_layer_set_font(dateTextLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DATE_FONT)));
